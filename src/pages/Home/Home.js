@@ -1,8 +1,15 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
+
+import Container from "@material-ui/core/Container";
+
+import { Form } from "../../components";
 
 const Home = () => {
-  return <Typography>Home</Typography>;
+  return (
+    <Container maxWidth="sm" component="main">
+      <Form />
+    </Container>
+  );
 };
 
 export default Home;
