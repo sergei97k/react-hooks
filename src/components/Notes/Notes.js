@@ -59,7 +59,7 @@ const Notes = ({ notes }) => {
 Notes.propTypes = {
   notes: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       title: PropTypes.string,
       date: PropTypes.string,
     })
