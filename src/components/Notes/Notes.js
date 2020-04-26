@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { formatRelative } from "date-fns";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -21,7 +22,14 @@ const useStyles = makeStyles((theme) => ({
   noResult: {
     color: theme.palette.primary.light,
   },
+  date: {
+    textTransform: "capitalize",
+  },
 }));
+
+const formatDate = (date) => {
+  return formatRelative(new Date(date), new Date());
+};
 
 const Notes = () => {
   const { loading, notes, getNotes, deleteNote } = useContext(NotesContext);
@@ -68,8 +76,9 @@ const Notes = () => {
                 component="span"
                 variant="body2"
                 color="textSecondary"
+                className={classes.date}
               >
-                {date}
+                {formatDate(date)}
               </Typography>
             }
           />
