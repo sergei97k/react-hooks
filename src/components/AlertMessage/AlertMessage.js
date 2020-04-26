@@ -1,19 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext } from "react";
 
 import Alert from "@material-ui/lab/Alert";
 
-const AlertMessage = ({ type, text }) => {
-  return <Alert severity={type}>{text}</Alert>;
-};
+import { AlertContext } from "../../context";
 
-AlertMessage.propTypes = {
-  type: PropTypes.oneOf(["error", "warning", "info", "success"]).isRequired,
-  text: PropTypes.string,
-};
+const AlertMessage = () => {
+  const {
+    alertMessage: { visible, type, text },
+    hideAlert,
+  } = useContext(AlertContext);
 
-AlertMessage.defaultProps = {
-  text: "",
+  if (!visible) {
+    return null;
+  }
+
+  return (
+    <Alert severity={type} onClose={hideAlert}>
+      {text}
+    </Alert>
+  );
 };
 
 export default AlertMessage;
