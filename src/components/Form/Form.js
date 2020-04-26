@@ -8,7 +8,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import SendIcon from "@material-ui/icons/Send";
 
-import { AlertContext } from "../../context";
+import { AlertContext, NotesContext } from "../../context";
 
 const validationSchema = Yup.object({
   note: Yup.string().trim().required(true),
@@ -16,6 +16,7 @@ const validationSchema = Yup.object({
 
 const Form = () => {
   const { showAlert } = useContext(AlertContext);
+  const { addNote } = useContext(NotesContext);
 
   const formik = useFormik({
     initialValues: {
@@ -25,6 +26,7 @@ const Form = () => {
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: (values, { resetForm }) => {
+      addNote(values.note);
       resetForm();
       showAlert("Saved", "success");
     },

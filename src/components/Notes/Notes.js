@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext, useEffect } from "react";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -8,20 +7,49 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
+
+import { NotesContext } from "../../context";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     backgroundColor: theme.palette.background.paper,
   },
+  noResult: {
+    color: theme.palette.primary.light,
+  },
 }));
 
-const Notes = ({ notes }) => {
+const Notes = () => {
+  const { loading, notes, getNotes, deleteNote } = useContext(NotesContext);
+
+  useEffect(() => {
+    getNotes();
+    // TODO: Need to fix
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const classes = useStyles();
 
+  if (loading) {
+    return (
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   if (!notes.length) {
-    return null;
+    return (
+      <Box display="flex" alignItems="center" justifyContent="center">
+        <Typography className={classes.noResult}>
+          List of notes is empty
+        </Typography>
+      </Box>
+    );
   }
 
   return (
@@ -46,7 +74,11 @@ const Notes = ({ notes }) => {
             }
           />
           <ListItemSecondaryAction>
-            <IconButton edge="end" aria-label="delete">
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              onClick={() => deleteNote(id)}
+            >
               <DeleteIcon />
             </IconButton>
           </ListItemSecondaryAction>
@@ -54,16 +86,6 @@ const Notes = ({ notes }) => {
       ))}
     </List>
   );
-};
-
-Notes.propTypes = {
-  notes: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      title: PropTypes.string,
-      date: PropTypes.string,
-    })
-  ).isRequired,
 };
 
 export default Notes;
