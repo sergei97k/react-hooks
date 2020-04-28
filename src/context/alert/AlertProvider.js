@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useCallback } from "react";
 import PropTypes from "prop-types";
 
 import { AlertContext } from "./alertContext";
@@ -14,7 +14,7 @@ const initialState = {
 const AlertProvider = ({ children }) => {
   const [state, dispatch] = useReducer(alertReducer, initialState);
 
-  const showAlert = (text, type) => {
+  const showAlert = useCallback((text, type) => {
     dispatch({
       type: SHOW_ALERT,
       payload: {
@@ -22,7 +22,7 @@ const AlertProvider = ({ children }) => {
         type,
       },
     });
-  };
+  }, []);
 
   const hideAlert = () => {
     dispatch({

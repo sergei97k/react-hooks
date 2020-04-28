@@ -36,9 +36,7 @@ const Form = () => {
     if (formik.errors.note) {
       showAlert("Please, enter value", "error");
     }
-    // TODO: Need to fix
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formik.errors]);
+  }, [formik.errors, showAlert]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
