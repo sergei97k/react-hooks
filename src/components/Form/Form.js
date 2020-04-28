@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
@@ -15,7 +15,8 @@ const validationSchema = Yup.object({
 });
 
 const Form = () => {
-  const { showAlert } = useContext(AlertContext);
+  const alertContext = useContext(AlertContext);
+  const showAlert = useCallback(alertContext.showAlert, []);
   const { addNote } = useContext(NotesContext);
 
   const formik = useFormik({

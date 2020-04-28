@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import { formatRelative } from "date-fns";
 
 import List from "@material-ui/core/List";
@@ -32,13 +32,13 @@ const formatDate = (date) => {
 };
 
 const Notes = () => {
-  const { loading, notes, getNotes, deleteNote } = useContext(NotesContext);
+  const notesContext = useContext(NotesContext);
+  const { loading, notes, deleteNote } = notesContext;
+  const getNotes = useCallback(notesContext.getNotes, []);
 
   useEffect(() => {
     getNotes();
-    // TODO: Need to fix
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getNotes]);
 
   const classes = useStyles();
 
