@@ -6,8 +6,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Home } from "./pages";
-import { Header } from "./components";
+import { Home } from "pages";
+import { Header } from "components";
 
 const About = lazy(() => import("./pages/About/About"));
 

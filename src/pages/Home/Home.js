@@ -3,8 +3,8 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 
-import { AlertProvider, NotesProvider } from "../../context";
-import { Form, Notes, AlertMessage } from "../../components";
+import { AlertProvider, NotesProvider } from "context";
+import { Form, Notes, AlertMessage } from "components";
 
 const Home = () => {
   return (

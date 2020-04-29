@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import Alert from "@material-ui/lab/Alert";
 
-import { AlertContext } from "../../context";
+import { AlertContext } from "context";
 
 const AlertMessage = () => {
   const {

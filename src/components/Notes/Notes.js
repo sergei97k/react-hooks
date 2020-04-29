@@ -12,7 +12,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { NotesContext } from "../../context";
+import { NotesContext } from "context";
 
 const useStyles = makeStyles((theme) => ({
   root: {

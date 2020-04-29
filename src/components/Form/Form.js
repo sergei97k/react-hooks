@@ -8,7 +8,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import SendIcon from "@material-ui/icons/Send";
 
-import { AlertContext, NotesContext } from "../../context";
+import { AlertContext, NotesContext } from "context";
 
 const validationSchema = Yup.object({
   note: Yup.string().trim().required(true),

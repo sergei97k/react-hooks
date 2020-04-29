@@ -1,15 +1,15 @@
 import React, { useReducer } from "react";
 import PropTypes from "prop-types";
 
-import { NotesContext } from "./notesContext";
-import notesReducer from "./notesReducer";
-import { ADD_NOTE, DELETE_NOTE, GET_NOTES, SHOW_LOADER } from "../types";
-
 import {
   getNotes as get,
   postNote as post,
   deleteNote as remove,
-} from "../../helpers/api";
+} from "helpers/api";
+
+import { NotesContext } from "./notesContext";
+import notesReducer from "./notesReducer";
+import { ADD_NOTE, DELETE_NOTE, GET_NOTES, SHOW_LOADER } from "../types";
 
 const initialState = {
   loading: false,
