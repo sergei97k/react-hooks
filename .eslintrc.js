@@ -16,4 +16,11 @@ module.exports = {
   },
   parser: "babel-eslint",
   plugins: ["prettier"],
+  settings: {
+    "import/resolver": {
+      node: {
+        paths: ["src"],
+      },
+    },
+  },
 };
