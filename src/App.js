@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
 
 import Container from "@material-ui/core/Container";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -17,6 +18,11 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const routes = [
+  { path: "/", name: "Home", Component: Home },
+  { path: "/about", name: "About", Component: About },
+];
+
 const App = () => {
   const classes = useStyles();
 
@@ -32,10 +38,22 @@ const App = () => {
             </Box>
           }
         >
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/about" component={About} />
-          </Switch>
+          {routes.map(({ path, Component }) => (
+            <Route key={path} exact path={path}>
+              {({ match }) => (
+                <CSSTransition
+                  in={Boolean(match)}
+                  timeout={500}
+                  classNames="page"
+                  unmountOnExit
+                >
+                  <div className="page">
+                    <Component />
+                  </div>
+                </CSSTransition>
+              )}
+            </Route>
+          ))}
         </Suspense>
       </Container>
     </Router>
